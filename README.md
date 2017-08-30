@@ -6,12 +6,8 @@ This repository contains the following basic experiments for determining low-lev
 
 * CodeProtectionSize: a victim thread executes on core 0 transactionally executes a blob of simple instructions of a given size (in bytes). A synchronized attacker thread running on a given core evicts the victim's code (a) using _clflush_ and (b) by executing conflicting code. This experiment shows that transactions abort when code is evicted from the L1-I through external events. 
 
+* CodeAbortTimings: repeatedly executes a range of experiments in which a victim thread reads/executes code while an attacker thread evicts corresponding memory. The results are written as CSV files. See source and stdout for a brief description of the experiments.
+
 * ReadSetSize: transactionally reads a given amount of bytes; optionally attempts to use large pages. This experiment helps to determine the maximum size of the read set.
 
-* BloomFilterAbort: TODO: determines abort times for LLC evictions.
-
-* PaperBenchmark: TODO: Istvan's experiment
-
-* CodeAbortTimings (aka MicroExperiments): repeatedly executes a range of experiments in which a victim thread reads/executes code while an attacker thread evicts corresponding memory. The results are written as CSV files. See source and stdout for a brief description of the experiments. 
-
-* CovertChannel (in sidechannels): TODO?
+_More is coming soon._ 
