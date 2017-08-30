@@ -1,14 +1,17 @@
+About
+=====
+This repository contains the following basic experiments for determining low-level properties of TSX. See https://aka.ms/msr-cloak for the corresponding _Usenix Security Symposium 2017_ paper.
 
-# Contributing
+* CodeSetSize: transactionally executes a blob of simple instructions of a given size (in MB). Depending on the configuration in the source, either _nop_ or _inc ecx; inc edx_ is executed many times. This experiment shows that more code than the LLC can hold can be executed transactionally.
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
+* CodeProtectionSize: a victim thread executes on core 0 transactionally executes a blob of simple instructions of a given size (in bytes). A synchronized attacker thread running on a given core evicts the victim's code (a) using _clflush_ and (b) by executing conflicting code. This experiment shows that transactions abort when code is evicted from the L1-I through external events. 
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+* ReadSetSize: transactionally reads a given amount of bytes; optionally attempts to use large pages. This experiment helps to determine the maximum size of the read set.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+* BloomFilterAbort: TODO: determines abort times for LLC evictions.
+
+* PaperBenchmark: TODO: Istvan's experiment
+
+* CodeAbortTimings (aka MicroExperiments): repeatedly executes a range of experiments in which a victim thread reads/executes code while an attacker thread evicts corresponding memory. The results are written as CSV files. See source and stdout for a brief description of the experiments. 
+
+* CovertChannel (in sidechannels): TODO?
